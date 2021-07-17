@@ -1,0 +1,38 @@
+{
+  "workshopName": "HAZID log KMRL",
+  "tags": ["Empty"],
+  "nodes": [
+    {
+      "nodeName": "Battery System",
+      "subnodes": [
+        {
+          "subnodeName": "Module",
+          "hazards": [
+            {
+              "hazardName": "Electrolyte Leakage",
+              "causes": [
+                "External abuse",
+                "sustain overcharge",
+                "heating of electrolyte"
+              ],
+              "consequences": [
+                "Explosion",
+                "Toxic atmosphere",
+                "Fast combustion"
+              ],
+              "preventativeSafeguards": [
+                "IP44 cabinet",
+                "Bilge pumping",
+                "Bilge level alarm"
+              ],
+              "mitigatingSafeguards": [
+                "Voltage monitoring on string",
+                "multiple strings"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

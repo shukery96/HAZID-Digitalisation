@@ -1,0 +1,26 @@
+{
+  "workshopName": "Hazid log Compressed Hydrogen",
+  "tags": ["Empty"],
+  "nodes": [
+    {
+      "nodeName": "General - Vessel",
+      "subnodes": [
+        {
+          "subnodeName": "Vent mast",
+          "hazards": [
+            {
+              "hazardName": "Vent mast for hydrogen exhaust",
+              "causes": ["FC Functional failure", "External damage"],
+              "consequences": ["Potential Explosive Atmosphere"],
+              "preventativeSafeguards": ["System design to keep LEL below 5%"],
+              "mitigatingSafeguards": [
+                "Gas valve isolation",
+                "Continuous ventilation"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

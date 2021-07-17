@@ -1,0 +1,37 @@
+{
+  "workshopName": "HAZID Log Compressed Hydrogen",
+  "tags": ["Empty"],
+  "nodes": [
+    {
+      "nodeName": "PEM Fuel Cell System",
+      "subnodes": [
+        {
+          "subnodeName": "PEM Fuel Cell Racks",
+          "hazads": [
+            {
+              "hazardName": "Electrical fire",
+              "causes": [
+                "Fatigue built up on electrical cables and components",
+                "Mechanical failure that cause short circuit"
+              ],
+              "consequences": [
+                "Fire",
+                "Smoke",
+                "Over heating",
+                "Toxic air and smoke"
+              ],
+              "preventativeSafeguards": [
+                "Fire resistant cabling to be used",
+                "Biannual maintenance inspecttion"
+              ],
+              "mitigatingSafeguards": [
+                "Smoke detection system",
+                "heat detection system"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

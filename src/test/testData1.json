@@ -1,0 +1,71 @@
+{
+  "workshopName": "Battery Workshop",
+  "tags" : ["Empty"],
+  "components": [
+    {
+      "componentName": "Fuel Cell space/Room",
+      "subcomponents": [
+        {
+          "subcomponentName": "",
+          "hazards": [
+            {
+              "hazardName": "Leakage from water cooling system",
+              "causes": ["FC functional Failure", "External Damage"],
+              "consequences": [" Short circuits", "Partial loss of power"],
+              "preventativeSafeguards": [
+                "Proper cooling water pressure",
+                "proper piping and fitting"
+              ],
+              "mitigatingSafeguards": [
+                "Pressure Switch as a secondary control measure to be used"
+              ]
+            },
+            {
+              "hazardName": "Electrical Fire",
+              "causes": [
+                " Poor Connection to trigger the heat in the cable",
+                "Fatigue Built up on electric cables and components"
+              ],
+              "consequences": ["Fire", "Smoke", "Toxic Air"],
+              "preventativeSafeguards": [
+                "Proper commissioning and testing of electrical system",
+                "Fire resistant cabling used"
+              ],
+              "mitigatingSafeguards": [
+                "Smoke detection system",
+                "Heat detection system",
+                "Clean Agent Fire Fighting"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "componentName": "Tank space",
+      "subcomponents": [
+        {
+          "subcomponentName": "H2 tanks",
+          "hazards": [
+            {
+              "hazardName": "gas development in tank area",
+              "causes": ["tank rupture", "valve failure", "regulator failure"],
+              "consequences": [
+                "rapid release of hydrogen",
+                "explosion due to tank rupture"
+              ],
+              "preventativeSafeguards": [
+                "pressure testing of tanks and piping system",
+                " tanks are located at one meter inboard"
+              ],
+              "mitigatingSafeguards": [
+                "pressure indicator is in place",
+                "isolation valve will be used for each tank bank and potential piping system"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

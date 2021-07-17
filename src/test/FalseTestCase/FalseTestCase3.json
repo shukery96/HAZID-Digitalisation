@@ -1,0 +1,32 @@
+{
+  "workshopName": "HAZID Log Compressed Hydrogen",
+  "tags": ["Empty"],
+  "nodes": [
+    {
+      "nodeNme": "Fuel Cell Space/Room",
+      "subnodes": [
+        {
+          "subnodeName": "",
+          "hazards": [
+            {
+              "hazardName": "Leakage from water cooling system",
+              "causes": [
+                "External Damage",
+                "Vibration and dynamic ship motion"
+              ],
+              "consequences": ["Short Circuits", "Partial loss of power"],
+              "preventativeSafeguards": [
+                "Proper cooling",
+                "Water pressure testing and commission"
+              ],
+              "mitigatingSafeguards": [
+                "Pressure accumulator to be used",
+                "Bilge alarm to be fitted"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

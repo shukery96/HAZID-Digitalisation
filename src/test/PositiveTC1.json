@@ -1,0 +1,23 @@
+{
+  "workshopName": "Battery5 Workshop",
+  "tags": ["Empty"],
+  "nodes": [
+    {
+      "nodeName": "default",
+      "subnodes": [
+        {
+          "subnodeName": "default",
+          "hazards": [
+            {
+              "hazardName": "Leakage from water cooling system",
+              "causes": ["cause1 "],
+              "consequences": ["short circuits ", "partial loss in power "],
+              "preventativeSafeguards": ["proper cooling ", "proper piping "],
+              "mitigatingSafeguards": ["use Pressure Switch "]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

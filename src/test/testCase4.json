@@ -1,0 +1,34 @@
+{
+  "workshopName": "HAZID log KMRL",
+  "tags": ["Empty"],
+  "nodes": [
+    {
+      "nodeName": "Battery Space",
+      "subnodes": [
+        {
+          "subnodeName": "",
+          "hazards": [
+            {
+              "hazardName": "Mechanical damage to battery room/ battery system",
+              "causes": ["collision/grounding"],
+              "consequences": [
+                "Water ingress",
+                "Punctured battery cells/modules",
+                "Thermal runway",
+                "Loss of energy"
+              ],
+              "preventativeSafeguards": [
+                "Vibration dampened racks (rubber feet)"
+              ],
+              "mitigatingSafeguards": [
+                "Slow speed operations (8-10 knots)",
+                "Ventilation system will have access to redundant power sources",
+                "2 gensets available for backup power"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "workshopName": "Insert Workshop Name",
+  "components": [
+    {
+      "componentName": "",
+      "subcomponents": [
+        {
+          "subcomponentName": "",
+          "hazards": [
+            {
+              "hazardName": "",
+              "cause": [""],
+              "consequence": [""],
+              "preventitiveSafeguards": [""],
+              "mitigatingSafeguards": [""]
+            },
+            {
+              "hazardName": "Electrical Fire",
+              "causes": [
+                " Poor Connection to trigger the heat in the cable",
+                "Fatigue Built up on electric cables and components"
+              ],
+              "consequences": ["Fire", "Smoke", "Toxic Air"],
+              "preventitiveSafeguards": [
+                "Proper commisioning and testing of electrical system",
+                "Fire resistant cabling used"
+              ],
+              "mitigatingSafeguards": [
+                "Smoke detection system",
+                "Heat detection system",
+                "Clean Agent Fire Fighting"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

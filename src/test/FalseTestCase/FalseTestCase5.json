@@ -1,0 +1,27 @@
+{
+  "workshopName": "HAZID Log Compressed Hydrogen",
+  "tags": ["Empty"],
+  "nodes": [
+    {
+      "nodeName": "General - Vessel",
+      "subnodes": [
+        {
+          "subnodeName": "Vent mast",
+          "hazards": [
+            {
+              "hazardName": "Vent mast for hydrogen exhaust",
+              "causes": ["Human error", "Mismatch of voltage"],
+              "consequces": ["Potential explosive atmosphere"],
+              "preventativeSafeguards": ["System design to keep LEL below 5%"],
+              "mitigatingSafeguards": [
+                "Gas valve isolation",
+                "continuous ventilation",
+                "Emergencey shutdown in place"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

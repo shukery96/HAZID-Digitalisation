@@ -1,0 +1,257 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  backgroundcolor: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.mainpage-div {
+  background-color: #61dafb;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+.main-page-leftcol {
+  border: 2px solid black;
+  width: 30%;
+}
+
+.left-title {
+  font-size: 20px;
+}
+.left-item {
+  border: 2px solid purple;
+}
+
+.main-page-rightcol {
+  border: 2px solid red;
+  width: 70%;
+}
+
+.workshop-creation-page {
+  /* background-color: blue; */
+}
+
+.wcp-header {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.wcp-header-title {
+  order: 1;
+  display: flex;
+  /* background-color: red; */
+  align-self: stretch;
+  align-items: flex-end;
+  margin-left: 70px;
+}
+
+.wcp-header-title-font {
+  margin-bottom: 0.2em;
+  color: #000000d9;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.wcp-header-button-list {
+  order: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-self: stretch;
+  margin-bottom: 5px;
+  background-color: white;
+}
+
+.wcp-header-button-item {
+  background-color: purple;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.create-workshop-modal {
+}
+
+.cwm-subheaders {
+  margin-top: 7px;
+  margin-bottom: 2px;
+  font-weight: bold;
+}
+
+.cwm-nf-list {
+}
+
+.node-field-component {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  /* background-color: blue; */
+}
+
+.nf-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.nf-item-title {
+  font-weight: bold;
+}
+.nf-item-subtitle {
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  justify-content: flex-end;
+  align-self: center;
+  /* background-color: #61dafb; */
+}
+
+.nf-content {
+  margin-top: 1px;
+  display: flex;
+  flex-direction: row;
+}
+
+.upload-data-page {
+  background-color: whitesmoke;
+}
+
+.udp-header {
+  /* background-color: red; */
+  display: fl;
+}
+.udp-body {
+  background-color: white;
+}
+
+.udp-header-title {
+  /* background-color: red; */
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 15px;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.2em;
+  color: #000000d9;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.udp-header-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.udp-header-subtitle {
+  margin-left: 15px;
+}
+
+.udp-header-content-button {
+  margin-left: 20px;
+}
+
+.display-upload-data-component {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.dud-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.dud-header-workshop-name {
+  order: 1;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  margin-left: 35%;
+  justify-content: center;
+}
+
+.dud-header-no-components {
+  order: 0;
+  justify-content: flex-start;
+  display: flex;
+  align-content: flex-start;
+  /* border: 2px solid red; */
+  margin-left: 15px;
+  margin-top: 0px;
+}
+
+.dud-body {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 50px;
+  /* border: 2px solid blue; */
+  /* background-color: #61dafb; */
+}
+
+.dud-node-component-item {
+  margin-top: 5px;
+}
+
+.dud-component-name {
+  align-items: flex-start;
+  display: flex;
+  font-size: 22px;
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+
+.dud-subcomponent-name {
+  /* border: 2px solid green; */
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 19px;
+  font-weight: 500;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.dud-body-col {
+  width: 20%;
+  border-right: 1px solid lightblue;
+}
+
+.dud-col-overview {
+  display: flex;
+  flex-direction: row;
+}
+
+.dud-col-heading {
+  font-size: medium;
+  font-weight: bold;
+  width: 20%;
+}
+
+.dud-hazard-overview {
+  display: flex;
+  flex-direction: row;
+  margin-top: 9px;
+  justify-content: space-evenly;
+}
+
+.dud-hazard-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.dud-points {
+  margin-left: 2px;
+  margin-right: 2px;
+}

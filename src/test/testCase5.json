@@ -1,0 +1,31 @@
+{
+  "workshopName": "HAZID log KMRL",
+  "tags": ["Empty"],
+  "nodes": [
+    {
+      "nodeName": "Electrical System",
+      "subnodes": [
+        {
+          "subnodeName": "",
+          "hazards": [
+            {
+              "hazardName": "Charger failure on shore",
+              "causes": [
+                "External abuse (e.g. Water ingress, heat load, mechanical impact)",
+                "Not responding to control limits"
+              ],
+              "consequences": ["Overcharging of batteries"],
+              "preventativeSafeguards": [
+                "Fuse protection",
+                "Overvoltage disconnection from the DC"
+              ],
+              "mitigatingSafeguards": [
+                "Emergency stop of charger available through control system"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "workshopName": "HAZID log KMRL",
+  "tags": ["Empty"],
+  "nodes": [
+    {
+      "nodeName": "Battery System",
+      "subnodes": [
+        {
+          "subnodeName": "Racks",
+          "hazards": [
+            {
+              "hazardName": "Electrical Fire",
+              "causes": ["Loose Connectors", "Overcurrent"],
+              "consequences": [
+                "Fire within the cabinet/racks",
+                "Heating of multiple modules"
+              ],
+              "preventativeSafeguards": [
+                "Flame Retardent Cables",
+                "Work instruction to make sure to tighten the bolts during FAT"
+              ],
+              "mitigatingSafeguards": [
+                "Fire detection (Smoke detection)",
+                "Manual Emergency Discoonection",
+                "CCTV",
+                "Temperature sensor for monitoring and alarm in battery rooms"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
