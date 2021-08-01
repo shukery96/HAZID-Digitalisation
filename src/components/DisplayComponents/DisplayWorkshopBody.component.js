@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../../FacilitatorPage.css";
 import { Menu, Carousel, Button, Typography } from "antd";
+import Card from "@material-ui/core/Card";
 import AddNodeModal from "../EditWorkshopComponents/AddNodeModal";
 import AddSubnodeModal from "../EditWorkshopComponents/AddSubnodeModal";
 import AddHazardModal from "../EditWorkshopComponents/AddHazardWithOptionsModal";
@@ -10,9 +11,31 @@ import {
   deleteItemFromIndex,
   addVisibilityToField,
 } from "../../util/Utilities";
+import { CardContent } from "@material-ui/core";
 
 const { SubMenu } = Menu;
 const { Title } = Typography;
+
+const cardStyle = {
+  display: 'block',
+  'margin-left': 'auto',
+  'margin-right': 'auto',
+  width: '80%',
+  'box-shadow': '0 10px 6px -6px #777',
+}
+
+function Historycard(props) {
+  return <Card style={cardStyle}>
+          <CardContent>
+            <Typography variant='h1' style={{ fontWeight: 800 }}>
+              {props.suggestionType}
+            </Typography>
+            <Typography variant='h4'>
+              {props.suggestion}
+            </Typography>
+          </CardContent>
+         </Card>;
+}
 
 export default class DisplayWorkshopBody extends Component {
   constructor(props) {
@@ -34,6 +57,7 @@ export default class DisplayWorkshopBody extends Component {
         preventativeSafeguards: [],
         mitigatingSafeguards: [],
       },
+      causes: [],
       isNodeModalVisible: false,
       isSubnodeModalVisible: false,
       nodeIndexToAddSubnode: 0,
@@ -142,6 +166,12 @@ export default class DisplayWorkshopBody extends Component {
 
   //Adds Suggestion to
   addSuggestionToHazard(suggestion, suggestionType) {
+    console.log("addSuggestiontoHazard")
+    console.log(suggestion)
+    console.log(suggestionType)
+    this.setState((state) => {
+      return {causes: suggestion}
+    });
     var suggestionsListObj = this.state.suggestions;
 
     const suggestionObj = addVisibilityToField(suggestion, true); //add Visibility Aspect to suggestions
@@ -306,6 +336,7 @@ export default class DisplayWorkshopBody extends Component {
               <div className="dw-subcol">
                 <div className="dw-left-subcol">
                   <Title level={3}>Suggestions</Title>
+                  <div><p>{this.state.hazardLoaded.hazardName}</p></div>
                   {hazardLoaded.causes.map((cause) => {
                     if (cause.visible) {
                       return <div>{cause.name}</div>;
@@ -345,7 +376,9 @@ export default class DisplayWorkshopBody extends Component {
               <div className="dw-subcol">
                 <div className="dw-left-subcol">
                   <Title level={3}> Suggestions</Title>
-                  {hazardLoaded.consequences.map(
+                  <div><p>{this.state.hazardLoaded.hazardName}</p></div>
+                  <div><Historycard suggestion={this.state.causes} suggestionType="Causes"/></div>
+                    {hazardLoaded.consequences.map(
                     (consequence, consequenceIndex) => {
                       if (consequence.visible) {
                         return (
