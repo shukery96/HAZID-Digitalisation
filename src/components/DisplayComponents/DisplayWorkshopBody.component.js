@@ -11,7 +11,7 @@ import {
   deleteItemFromIndex,
   addVisibilityToField,
 } from "../../util/Utilities";
-import { CardContent } from "@material-ui/core";
+import { CardContent, List, ListItem } from "@material-ui/core";
 
 const { SubMenu } = Menu;
 const { Title } = Typography;
@@ -22,19 +22,46 @@ const cardStyle = {
   'margin-right': 'auto',
   width: '80%',
   'box-shadow': '0 10px 6px -6px #777',
+  'margin-bottom': '10px', 
+}
+
+function arrayfy(suggestion) {
+  const arr = []
+  for(const i in suggestion) {
+    arr.push(suggestion[i].name)
+  }
+  return arr
 }
 
 function Historycard(props) {
-  return <Card style={cardStyle}>
-          <CardContent>
-            <Typography variant='h1' style={{ fontWeight: 800 }}>
-              {props.suggestionType}
-            </Typography>
-            <Typography variant='h4'>
-              {props.suggestion}
-            </Typography>
-          </CardContent>
-         </Card>;
+  console.log("props.suggestion: ", props.suggestion, ", typeof:", typeof(props.suggestion))
+  const arr = arrayfy(props.suggestion);
+  if(props.suggestionType === "hazardName" || props.suggestion === []) {
+    return <Card style={cardStyle}>
+            <CardContent>
+              <Typography variant='h1' style={{ fontWeight: 800 }}>
+                {props.suggestionType}
+              </Typography>
+              <Typography variant='h4'>
+                {props.suggestion}
+              </Typography>
+            </CardContent>
+           </Card>;
+  } else {
+    return <Card style={cardStyle}>
+            <CardContent>
+              <Typography variant='h1' style={{ fontWeight: 800 }}>
+                {props.suggestionType}
+              </Typography>
+              <List alignItems="center" justifyContent="center">
+                {arr.map(item => {
+                  return <ListItem alignItems="center" justifyContent="center">{item}</ListItem>;
+                })}
+              </List>
+            </CardContent>
+           </Card>;
+  }
+
 }
 
 export default class DisplayWorkshopBody extends Component {
@@ -57,7 +84,6 @@ export default class DisplayWorkshopBody extends Component {
         preventativeSafeguards: [],
         mitigatingSafeguards: [],
       },
-      causes: [],
       isNodeModalVisible: false,
       isSubnodeModalVisible: false,
       nodeIndexToAddSubnode: 0,
@@ -169,9 +195,11 @@ export default class DisplayWorkshopBody extends Component {
     console.log("addSuggestiontoHazard")
     console.log(suggestion)
     console.log(suggestionType)
-    this.setState((state) => {
-      return {causes: suggestion}
-    });
+    console.log("Causes", this.state.suggestions.causes)
+    // this.setState((state) => {
+    //   return {causes: suggestion}
+    // });
+
     var suggestionsListObj = this.state.suggestions;
 
     const suggestionObj = addVisibilityToField(suggestion, true); //add Visibility Aspect to suggestions
@@ -238,6 +266,7 @@ export default class DisplayWorkshopBody extends Component {
     const { data } = this.props;
     const { hazardLoaded, suggestions } = this.state;
     // console.log("Hazard Loaded", hazardLoaded.consequences[0].name);
+    // console.log("Hazard Loaded: ", this.state.hazardLoaded);
 
     return (
       <div className="dw-body">
@@ -336,7 +365,7 @@ export default class DisplayWorkshopBody extends Component {
               <div className="dw-subcol">
                 <div className="dw-left-subcol">
                   <Title level={3}>Suggestions</Title>
-                  <div><p>{this.state.hazardLoaded.hazardName}</p></div>
+                  <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
                   {hazardLoaded.causes.map((cause) => {
                     if (cause.visible) {
                       return <div>{cause.name}</div>;
@@ -376,8 +405,8 @@ export default class DisplayWorkshopBody extends Component {
               <div className="dw-subcol">
                 <div className="dw-left-subcol">
                   <Title level={3}> Suggestions</Title>
-                  <div><p>{this.state.hazardLoaded.hazardName}</p></div>
-                  <div><Historycard suggestion={this.state.causes} suggestionType="Causes"/></div>
+                  <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
+                  <div><Historycard suggestion={this.state.suggestions.causes} suggestionType="Causes"/></div>
                     {hazardLoaded.consequences.map(
                     (consequence, consequenceIndex) => {
                       if (consequence.visible) {
@@ -423,6 +452,9 @@ export default class DisplayWorkshopBody extends Component {
               <div className="dw-subcol">
                 <div className="dw-left-subcol">
                   <Title level={3}> Suggestions</Title>
+                  <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
+                  <div><Historycard suggestion={this.state.suggestions.causes} suggestionType="Causes"/></div>
+                  <div><Historycard suggestion={this.state.suggestions.consequences} suggestionType="Consequences"/></div>
                   {hazardLoaded.preventativeSafeguards.map((pSafeguard) => {
                     if (pSafeguard.visible) {
                       return <div>{pSafeguard.name}</div>;
@@ -464,6 +496,10 @@ export default class DisplayWorkshopBody extends Component {
               <div className="dw-subcol">
                 <div className="dw-left-subcol">
                   <Title level={3}> Suggestions</Title>
+                  <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
+                  <div><Historycard suggestion={this.state.suggestions.causes} suggestionType="Causes"/></div>
+                  <div><Historycard suggestion={this.state.suggestions.consequences} suggestionType="Consequences"/></div>
+                  <div><Historycard suggestion={this.state.suggestions.preventativeSafeguards} suggestionType="Preventative Safeguards"/></div>
                   {hazardLoaded.mitigatingSafeguards.map((mSafeguard) => {
                     if (mSafeguard.visible) {
                       return <div>{mSafeguard.name}</div>;

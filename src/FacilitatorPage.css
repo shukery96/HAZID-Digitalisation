@@ -324,6 +324,7 @@
 .dw-left-subcol {
   width: 50%;
   background-color: lightsalmon;
+  overflow-y: scroll;
 }
 
 .dw-right-subcol {
