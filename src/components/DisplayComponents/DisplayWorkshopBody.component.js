@@ -23,6 +23,12 @@ const cardStyle = {
   width: '80%',
   'box-shadow': '0 10px 6px -6px #777',
   'margin-bottom': '10px', 
+  'margin-top': '10px', 
+}
+
+const listStyle = {
+  display:'inline-block',
+  'text-align':'center',
 }
 
 function arrayfy(suggestion) {
@@ -53,9 +59,9 @@ function Historycard(props) {
               <Typography variant='h1' style={{ fontWeight: 800 }}>
                 {props.suggestionType}
               </Typography>
-              <List alignItems="center" justifyContent="center">
+              <List style={listStyle}>
                 {arr.map(item => {
-                  return <ListItem alignItems="center" justifyContent="center">{item}</ListItem>;
+                  return <ListItem style={listStyle}>{item}</ListItem>;
                 })}
               </List>
             </CardContent>
@@ -364,7 +370,7 @@ export default class DisplayWorkshopBody extends Component {
               <h1>Causes</h1>
               <div className="dw-subcol">
                 <div className="dw-left-subcol">
-                  <Title level={3}>Suggestions</Title>
+                  {/* <Title level={3}>Suggestions</Title> */}
                   <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
                   {hazardLoaded.causes.map((cause) => {
                     if (cause.visible) {
@@ -373,7 +379,7 @@ export default class DisplayWorkshopBody extends Component {
                   })}
                 </div>
                 <div className="dw-right-subcol">
-                  <Title level={3}>User Feedback</Title>
+                  {/* <Title level={3}>User Feedback</Title> */}
                   <div className="los-ov">
                     <div className="los-header">List of Suggestions</div>
                     <Button
@@ -404,7 +410,7 @@ export default class DisplayWorkshopBody extends Component {
               <h1>Consequences</h1>
               <div className="dw-subcol">
                 <div className="dw-left-subcol">
-                  <Title level={3}> Suggestions</Title>
+                  {/* <Title level={3}> Suggestions</Title> */}
                   <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
                   <div><Historycard suggestion={this.state.suggestions.causes} suggestionType="Causes"/></div>
                     {hazardLoaded.consequences.map(
@@ -418,7 +424,7 @@ export default class DisplayWorkshopBody extends Component {
                   )}
                 </div>
                 <div className="dw-right-subcol">
-                  <Title level={3}>User Feedback</Title>
+                  {/* <Title level={3}>User Feedback</Title> */}
                   <div className="los-ov">
                     <div className="los-header">List of Suggestions</div>
                     <Button
@@ -451,7 +457,7 @@ export default class DisplayWorkshopBody extends Component {
               <h1>Preventative Safeguards</h1>
               <div className="dw-subcol">
                 <div className="dw-left-subcol">
-                  <Title level={3}> Suggestions</Title>
+                  {/* <Title level={3}> Suggestions</Title> */}
                   <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
                   <div><Historycard suggestion={this.state.suggestions.causes} suggestionType="Causes"/></div>
                   <div><Historycard suggestion={this.state.suggestions.consequences} suggestionType="Consequences"/></div>
@@ -462,7 +468,7 @@ export default class DisplayWorkshopBody extends Component {
                   })}
                 </div>
                 <div className="dw-right-subcol">
-                  <Title level={3}>User Feedback</Title>
+                  {/* <Title level={3}>User Feedback</Title> */}
                   <div className="los-ov">
                     <div className="los-header">List of Suggestions</div>
                     <Button
@@ -495,7 +501,7 @@ export default class DisplayWorkshopBody extends Component {
               <h1>Mitigating Safeguards</h1>
               <div className="dw-subcol">
                 <div className="dw-left-subcol">
-                  <Title level={3}> Suggestions</Title>
+                  {/* <Title level={3}> Suggestions</Title> */}
                   <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
                   <div><Historycard suggestion={this.state.suggestions.causes} suggestionType="Causes"/></div>
                   <div><Historycard suggestion={this.state.suggestions.consequences} suggestionType="Consequences"/></div>
@@ -507,7 +513,7 @@ export default class DisplayWorkshopBody extends Component {
                   })}
                 </div>
                 <div className="dw-right-subcol">
-                  <Title level={3}>User Feedback</Title>
+                  {/* <Title level={3}>User Feedback</Title> */}
                   <div className="los-ov">
                     <div className="los-header">List of Suggestions</div>
                     <Button
