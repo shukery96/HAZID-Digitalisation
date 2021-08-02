@@ -542,6 +542,13 @@ export default class DisplayWorkshopBody extends Component {
                 </div>
               </div>
             </div>
+            <div className="dw-final-slide">
+                <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
+                <div><Historycard suggestion={this.state.suggestions.causes} suggestionType="Causes"/></div>
+                <div><Historycard suggestion={this.state.suggestions.consequences} suggestionType="Consequences"/></div>
+                <div><Historycard suggestion={this.state.suggestions.preventativeSafeguards} suggestionType="Preventative Safeguards"/></div>
+                <div><Historycard suggestion={this.state.suggestions.mitigatingSafeguards} suggestionType="Mitigating Safeguards"/></div>
+            </div>
           </Carousel>
         </div>
       </div>

@@ -285,7 +285,7 @@
 }
 
 .dw-body {
-  height: 80vh;
+  height: 70vh;
   display: flex;
   flex-direction: row;
   margin-top: 2px;
@@ -296,7 +296,7 @@
   width: 20%;
   background-color: white;
   border: 1px solid black;
-  height: 80vh;
+  height: 70vh;
 }
 
 .item-ii {
@@ -312,13 +312,13 @@
 
 .dw-carousel-div {
   background-color: white;
-  height: 80vh;
+  height: 70vh;
 }
 
 .dw-subcol {
   display: flex;
   flex-direction: row;
-  height: 75vh;
+  height: 65vh;
 }
 
 .dw-left-subcol {
@@ -327,9 +327,16 @@
   overflow-y: scroll;
 }
 
+.dw-final-slide {
+  background-color: lightsalmon;
+  overflow-y: scroll;
+  height: 70vh;
+}
+
 .dw-right-subcol {
   width: 50%;
   background-color: lightblue;
+  padding: 10px;
 }
 
 .dw-item-header {
