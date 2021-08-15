@@ -41,6 +41,7 @@ export default class DisplayWorkshop extends Component {
                     consequences: [""],
                     preventativeSafeguards: [""],
                     mitigatingSafeguards: [""],
+                    analysis: "",
                   },
                 ],
               },
@@ -368,6 +369,11 @@ export default class DisplayWorkshop extends Component {
       suggestionList.mitigatingSafeguards.forEach((suggestion) => {
         mSafeList.push(suggestion);
       });
+    }
+    if (type === "analysis") {
+      data.nodes[nodeSelIndex].subnodes[subnodeSelIndex].hazards[
+        hazardSelndex
+      ].analysis = suggestionList;
     }
 
     console.log("Saving suggestions to db:", data);

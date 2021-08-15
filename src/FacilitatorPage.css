@@ -292,6 +292,23 @@
   /* background-color: green; */
 }
 
+.dw-body-right-col .dw-body-right-last .dw-body-right-last-left {
+  width: 40%;
+  float: left;
+  padding-right: 10px;
+}
+
+.dw-body-right-col .dw-body-right-last .dw-body-right-last-right {
+  width: 60%;
+  float: right;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.dw-body-right-col .dw-body-right-last .dw-body-right-last-right .dw-body-right-last-right-text {
+  padding: 10px;
+}
+
 .dw-body-left-col {
   width: 20%;
   background-color: white;
@@ -306,13 +323,27 @@
 }
 
 .dw-body-right-col {
+  padding-top: 10px;
+  padding-bottom: 10px;
   width: 80%;
-  background-color: whitesmoke;
+  background-color: lightsalmon;
+  overflow-y: scroll;
+}
+
+.firstPage {
+  background-color: lightsalmon;
 }
 
 .dw-carousel-div {
-  background-color: white;
+  background-color: lightsalmon;
   height: 70vh;
+  width: 80%;
+  margin: auto;
+}
+
+.dw-body-right-header .sliderButton {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .dw-subcol {
@@ -744,6 +775,7 @@
   width: 100%;
   /* background-color: red; */
 }
+
 .cancel-suggestion {
   margin-left: auto;
 }

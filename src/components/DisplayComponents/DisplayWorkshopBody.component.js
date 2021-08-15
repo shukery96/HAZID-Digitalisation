@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../FacilitatorPage.css";
-import { Menu, Carousel, Button, Typography } from "antd";
+import { Menu, Carousel, Typography } from "antd";
 import Card from "@material-ui/core/Card";
 import AddNodeModal from "../EditWorkshopComponents/AddNodeModal";
 import AddSubnodeModal from "../EditWorkshopComponents/AddSubnodeModal";
@@ -11,7 +11,9 @@ import {
   deleteItemFromIndex,
   addVisibilityToField,
 } from "../../util/Utilities";
-import { CardContent, List, ListItem } from "@material-ui/core";
+import grid from '../../grid.jpg';
+import axios from 'axios';
+import { CardContent, List, ListItem, Button, TextField } from "@material-ui/core";
 
 const { SubMenu } = Menu;
 const { Title } = Typography;
@@ -20,10 +22,30 @@ const cardStyle = {
   display: 'block',
   'margin-left': 'auto',
   'margin-right': 'auto',
-  width: '80%',
-  'box-shadow': '0 10px 6px -6px #777',
+  width: '70%',
+  'box-shadow': '0 7px 5px -5px #777',
   'margin-bottom': '10px', 
+  'padding-bottom': '10px',
+  'padding-left': '10px',
+  'padding-right': '10px',
   'margin-top': '10px', 
+}
+
+const cardStyle2 = {
+  display: 'block',
+  'margin-left': 'auto',
+  'margin-right': 'auto',
+  width: '100%',
+  'box-shadow': '0 7px 5px -5px #777',
+  'margin-bottom': '10px', 
+  'padding-bottom': '10px',
+  'padding-left': '10px',
+  'padding-right': '10px',
+  'margin-top': '10px', 
+}
+
+const padding = {
+  'padding-bottom': '10px'
 }
 
 const listStyle = {
@@ -43,7 +65,7 @@ function Historycard(props) {
   console.log("props.suggestion: ", props.suggestion, ", typeof:", typeof(props.suggestion))
   const arr = arrayfy(props.suggestion);
   if(props.suggestionType === "hazardName" || props.suggestion === []) {
-    return <Card style={cardStyle}>
+    return <Card style={cardStyle2}>
             <CardContent>
               <Typography variant='h1' style={{ fontWeight: 800 }}>
                 {props.suggestionType}
@@ -54,7 +76,7 @@ function Historycard(props) {
             </CardContent>
            </Card>;
   } else {
-    return <Card style={cardStyle}>
+    return <Card style={cardStyle2}>
             <CardContent>
               <Typography variant='h1' style={{ fontWeight: 800 }}>
                 {props.suggestionType}
@@ -89,6 +111,7 @@ export default class DisplayWorkshopBody extends Component {
         consequences: [],
         preventativeSafeguards: [],
         mitigatingSafeguards: [],
+        analysis: "",
       },
       isNodeModalVisible: false,
       isSubnodeModalVisible: false,
@@ -96,7 +119,10 @@ export default class DisplayWorkshopBody extends Component {
       isHazardModalVisible: false,
       subnodeIndexToAddHazard: 0,
       isHazardAllocated: false,
+      selectedGridFile: grid
     };
+
+    this.handlePhotoChange = this.handlePhotoChange.bind(this)
 
     this.updateClickedItem = this.updateClickedItem.bind(this);
     this.next = this.next.bind(this);
@@ -117,6 +143,12 @@ export default class DisplayWorkshopBody extends Component {
 
     this.addSuggestionToHazard = this.addSuggestionToHazard.bind(this);
     this.deleteSuggestion = this.deleteSuggestion.bind(this);
+  }
+
+  handlePhotoChange(event) {
+    this.setState({
+      selectedGridFile: URL.createObjectURL(event.target.files[0])
+    })
   }
 
   next() {
@@ -268,6 +300,101 @@ export default class DisplayWorkshopBody extends Component {
     );
   }
 
+  choices(type, suggestions) {
+    var typeName = ""
+    var indexName = {}
+    if(type === "cause") {
+      typeName = "Causes"
+      indexName = 
+      (suggestions.causes.map((causeSuggestion, causeIndex) => {
+        return (
+          <DisplaySuggestionField
+            suggestion={causeSuggestion}
+            index={causeIndex}
+            type={type}
+            deleteSuggestion={this.deleteSuggestion}
+          />
+        );
+      }))
+    } else if (type == "consequence") {
+      typeName = "Consquences"
+      indexName = 
+      (suggestions.consequences.map(
+        (consqSuggestion, consqIndex) => {
+          return (
+            <DisplaySuggestionField
+              suggestion={consqSuggestion}
+              index={consqIndex}
+              type="consequence"
+              deleteSuggestion={this.deleteSuggestion}
+            />
+          );
+        }
+      ))
+    } else if (type == "pSafeguard") {
+      typeName = "Preventative Safeguards"
+      indexName = 
+      (suggestions.preventativeSafeguards.map(
+        (pSafeSuggestion, pSafeIndex) => {
+          return (
+            <DisplaySuggestionField
+              suggestion={pSafeSuggestion}
+              index={pSafeIndex}
+              type="pSafeguard"
+              deleteSuggestion={this.deleteSuggestion}
+            />
+          );
+        }
+      ))
+    } else if (type == "mSafeguard") {
+      typeName = "Mitigating Safeguards"
+      indexName = 
+      (suggestions.mitigatingSafeguards.map(
+        (mSafeSuggestion, mSafeIndex) => {
+          return (
+            <DisplaySuggestionField
+              suggestion={mSafeSuggestion}
+              index={mSafeIndex}
+              type="mSafeguard"
+              deleteSuggestion={this.deleteSuggestion}
+            />
+          );
+        }
+      ))
+    }
+    return (
+      <Card style={cardStyle}>
+        <h3>{typeName}</h3>
+        <div className="los-ov">
+          <div className="los-header">List of Suggestions</div>
+            <Button
+              onClick={() => this.saveSuggestion(type)}
+              style={{ marginLeft: "auto" }}
+            >
+              Save to Database
+            </Button>
+          </div>
+          <AddSuggestionField
+            type={type}
+            addSuggestion={this.addSuggestionToHazard}
+          />
+          {indexName}
+      </Card>
+    );
+  }
+
+  handleAnalysisChange(event) {
+    const { suggestions } = this.state;
+    const newSuggestions = {
+      causes: suggestions.causes,
+      consequences: suggestions.consequences,
+      preventativeSafeguards: suggestions.preventativeSafeguards,
+      mitigatingSafeguards: suggestions.mitigatingSafeguards,
+      analysis: event.target.value,
+    }
+    this.setState({suggestions: newSuggestions});
+  }
+
   render() {
     const { data } = this.props;
     const { hazardLoaded, suggestions } = this.state;
@@ -356,202 +483,70 @@ export default class DisplayWorkshopBody extends Component {
           </Menu>
         </div>
         <div className="dw-body-right-col">
+          <h1><u><b>{hazardLoaded.hazardName}</b></u></h1>
           <div className="dw-body-right-header">
-            <Button onClick={this.previous}>Previous</Button>
-            <Button onClick={this.next}>Next</Button>
+            <Button className="sliderButton" variant="contained" color="secondary" onClick={this.previous}>Previous</Button>
+            <Button className="sliderButton" variant="contained" color="secondary" onClick={this.next}>Next</Button>
           </div>
           <Carousel
             className="dw-carousel-div"
             arrows={true}
             ref={(node) => (this.carousel = node)}
           >
-            <h1> Hazard: {hazardLoaded.hazardName}</h1>
-            <div>
-              <h1>Causes</h1>
-              <div className="dw-subcol">
-                <div className="dw-left-subcol">
-                  {/* <Title level={3}>Suggestions</Title> */}
-                  <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
-                  {hazardLoaded.causes.map((cause) => {
-                    if (cause.visible) {
-                      return <div>{cause.name}</div>;
-                    }
-                  })}
-                </div>
-                <div className="dw-right-subcol">
-                  {/* <Title level={3}>User Feedback</Title> */}
-                  <div className="los-ov">
-                    <div className="los-header">List of Suggestions</div>
-                    <Button
-                      onClick={() => this.saveSuggestion("cause")}
-                      style={{ marginLeft: "auto" }}
-                    >
-                      Save to Database
-                    </Button>
-                  </div>
-                  <AddSuggestionField
-                    type="cause"
-                    addSuggestion={this.addSuggestionToHazard}
-                  />
-                  {suggestions.causes.map((causeSuggestion, causeIndex) => {
-                    return (
-                      <DisplaySuggestionField
-                        suggestion={causeSuggestion}
-                        index={causeIndex}
-                        type="cause"
-                        deleteSuggestion={this.deleteSuggestion}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
+            <div className="firstPage">
+              {this.choices("cause", suggestions)}
             </div>
-            <div>
-              <h1>Consequences</h1>
-              <div className="dw-subcol">
-                <div className="dw-left-subcol">
-                  {/* <Title level={3}> Suggestions</Title> */}
-                  <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
-                  <div><Historycard suggestion={this.state.suggestions.causes} suggestionType="Causes"/></div>
-                    {hazardLoaded.consequences.map(
-                    (consequence, consequenceIndex) => {
-                      if (consequence.visible) {
-                        return (
-                          <div className="item-ii">{consequence.name}</div>
-                        );
-                      }
-                    }
-                  )}
-                </div>
-                <div className="dw-right-subcol">
-                  {/* <Title level={3}>User Feedback</Title> */}
-                  <div className="los-ov">
-                    <div className="los-header">List of Suggestions</div>
-                    <Button
-                      onClick={() => this.saveSuggestion("consequence")}
-                      style={{ marginLeft: "auto" }}
-                    >
-                      Save to Database
-                    </Button>
-                  </div>
-                  <AddSuggestionField
-                    type="consequence"
-                    addSuggestion={this.addSuggestionToHazard}
-                  />
-                  {suggestions.consequences.map(
-                    (consqSuggestion, consqIndex) => {
-                      return (
-                        <DisplaySuggestionField
-                          suggestion={consqSuggestion}
-                          index={consqIndex}
-                          type="consequence"
-                          deleteSuggestion={this.deleteSuggestion}
-                        />
-                      );
-                    }
-                  )}
-                </div>
-              </div>
-            </div>
-            <div>
-              <h1>Preventative Safeguards</h1>
-              <div className="dw-subcol">
-                <div className="dw-left-subcol">
-                  {/* <Title level={3}> Suggestions</Title> */}
-                  <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
-                  <div><Historycard suggestion={this.state.suggestions.causes} suggestionType="Causes"/></div>
-                  <div><Historycard suggestion={this.state.suggestions.consequences} suggestionType="Consequences"/></div>
-                  {hazardLoaded.preventativeSafeguards.map((pSafeguard) => {
-                    if (pSafeguard.visible) {
-                      return <div>{pSafeguard.name}</div>;
-                    }
-                  })}
-                </div>
-                <div className="dw-right-subcol">
-                  {/* <Title level={3}>User Feedback</Title> */}
-                  <div className="los-ov">
-                    <div className="los-header">List of Suggestions</div>
-                    <Button
-                      onClick={() => this.saveSuggestion("pSafeguard")}
-                      style={{ marginLeft: "auto" }}
-                    >
-                      Save to Database
-                    </Button>
-                  </div>
-                  <AddSuggestionField
-                    type="pSafeguard"
-                    addSuggestion={this.addSuggestionToHazard}
-                  />
-                  {suggestions.preventativeSafeguards.map(
-                    (pSafeSuggestion, pSafeIndex) => {
-                      return (
-                        <DisplaySuggestionField
-                          suggestion={pSafeSuggestion}
-                          index={pSafeIndex}
-                          type="pSafeguard"
-                          deleteSuggestion={this.deleteSuggestion}
-                        />
-                      );
-                    }
-                  )}
-                </div>
-              </div>
-            </div>
-            <div>
-              <h1>Mitigating Safeguards</h1>
-              <div className="dw-subcol">
-                <div className="dw-left-subcol">
-                  {/* <Title level={3}> Suggestions</Title> */}
-                  <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
-                  <div><Historycard suggestion={this.state.suggestions.causes} suggestionType="Causes"/></div>
-                  <div><Historycard suggestion={this.state.suggestions.consequences} suggestionType="Consequences"/></div>
-                  <div><Historycard suggestion={this.state.suggestions.preventativeSafeguards} suggestionType="Preventative Safeguards"/></div>
-                  {hazardLoaded.mitigatingSafeguards.map((mSafeguard) => {
-                    if (mSafeguard.visible) {
-                      return <div>{mSafeguard.name}</div>;
-                    }
-                  })}
-                </div>
-                <div className="dw-right-subcol">
-                  {/* <Title level={3}>User Feedback</Title> */}
-                  <div className="los-ov">
-                    <div className="los-header">List of Suggestions</div>
-                    <Button
-                      onClick={() => this.saveSuggestion("mSafeguard")}
-                      style={{ marginLeft: "auto" }}
-                    >
-                      Save to Database
-                    </Button>
-                  </div>
-                  <AddSuggestionField
-                    type="mSafeguard"
-                    addSuggestion={this.addSuggestionToHazard}
-                  />
-                  {suggestions.mitigatingSafeguards.map(
-                    (mSafeSuggestion, mSafeIndex) => {
-                      return (
-                        <DisplaySuggestionField
-                          suggestion={mSafeSuggestion}
-                          index={mSafeIndex}
-                          type="mSafeguard"
-                          deleteSuggestion={this.deleteSuggestion}
-                        />
-                      );
-                    }
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="dw-final-slide">
+            <div className ="firstPage">
+              {this.choices("consequence", suggestions)} 
+              {this.choices("cause", suggestions)}
+            </div> 
+            <div className ="firstPage">
+              {this.choices("pSafeguard", suggestions)}  
+              {this.choices("consequence", suggestions)}
+              {this.choices("cause", suggestions)}
+            </div> 
+            <div className ="firstPage">
+              {this.choices("mSafeguard", suggestions)}  
+              {this.choices("pSafeguard", suggestions)}  
+              {this.choices("consequence", suggestions)}
+              {this.choices("cause", suggestions)}
+            </div> 
+            <div className="dw-body-right-last">
+              <div className="dw-body-right-last-left">
                 <div><Historycard suggestion={this.state.hazardLoaded.hazardName} suggestionType="hazardName"/></div>
                 <div><Historycard suggestion={this.state.suggestions.causes} suggestionType="Causes"/></div>
                 <div><Historycard suggestion={this.state.suggestions.consequences} suggestionType="Consequences"/></div>
                 <div><Historycard suggestion={this.state.suggestions.preventativeSafeguards} suggestionType="Preventative Safeguards"/></div>
                 <div><Historycard suggestion={this.state.suggestions.mitigatingSafeguards} suggestionType="Mitigating Safeguards"/></div>
-            </div>
-          </Carousel>
+              </div>
+              <div className="dw-body-right-last-right">
+                <Card style={cardStyle2} className="dw-body-right-last-right-text">
+                  <input style={padding} type="file" onChange={this.handlePhotoChange}/>
+                  <img style={padding}src={this.state.selectedGridFile} alt="Grid Image" width="100%"/>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Analysis"
+                    multiline
+                    rows={4}
+                    placeholder="Analysis"
+                    variant="outlined"
+                    fullWidth
+                    value={this.state.suggestions.analysis} 
+                    onChange={this.handleAnalysisChange.bind(this)}
+                    style={padding}
+                  />
+                  <Button
+                    onClick={() => this.saveSuggestion("analysis")}
+                  >
+                    Save to Database
+                  </Button>
+                </Card>
+              </div>
+            </div>   
+          </Carousel>   
         </div>
       </div>
     );
   }
 }
+
