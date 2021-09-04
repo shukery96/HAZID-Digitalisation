@@ -538,7 +538,7 @@ export default class DisplayWorkshop extends Component {
             </div>
           </div>
 
-          <div className="dw-header-right-col">Thursday, 30th June 2021</div>
+          <div className="dw-header-right-col">Tuesday, 17th August 2021</div>
         </div>
         <DisplayWorkshopBody
           data={this.state.data}
